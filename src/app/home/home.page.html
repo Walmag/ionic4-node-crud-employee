@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar class="image-background">
+        <ion-title>
+            App Cadastro de Funcionários
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list class="ios list-ios hydrated">
+        <ion-list-header class="ios hydrated">
+            Lista de Funcionários
+        </ion-list-header>
+
+        <ion-item *ngFor="let employee of Employees" class="hydrated in-list item-label item ios ion-focusable">
+            <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+
+                <h1>Parabéns {{employee.employee_name}}. Você tem</h1>
+                <p id="setInf"></p>
+                <h1> {{employee.birthday}} anos.</h1>
+            </ion-label>
+
+            <div class="item-note" item-end>
+                <button ion-button clear [routerLink]="['/edit-employee/', employee._id]">
+          <ion-icon name="create" style="zoom:2.0"></ion-icon>
+        </button>
+                <button ion-button clear (click)="deleteEmployee(employee, i)">
+          <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+        </button>
+            </div>
+        </ion-item>
+    </ion-list>
+    <ion-fab type="large" vertical="bottom" class="block" horizontal="center" slot="fixed" routerLink="/add-employee">
+        <ion-fab-button>
+            <ion-icon type="large" name="person-add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
+
+<style>
+    .image-background {
+        background-image: url(https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+    }
+</style>
+
+<script>
+    function countDaysToBirth() {
+        var actual = new Date();
+        var end = this.employee.birthday;
+
+        var diference = actual - end;
+
+        return diference
+
+    }
+
+    document.getElementById("setInf").innerHTML = countDaysToBirth();
+</script>
